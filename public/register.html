@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Taxes - طلب الولوج</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #27ae60;
+            --primary-hover: #219653;
+            --text-dark: #2c3e50;
+            --text-muted: #7f8c8d;
+            --glass-bg: rgba(255, 255, 255, 0.75);
+            --glass-border: rgba(255, 255, 255, 0.5);
+            --glass-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Cairo', sans-serif; background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%); min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 100px 20px 40px; color: var(--text-dark); }
+        
+        .navbar { position: fixed; top: 0; left: 0; width: 100%; height: 70px; background: rgba(255, 255, 255, 0.45); backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center; padding: 0 8%; z-index: 1000; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
+        .logo { font-size: 1.6rem; font-weight: 800; color: var(--text-dark); text-decoration: none; display: flex; align-items: center; gap: 8px; }
+        .logo i { color: var(--primary); }
+
+        /* حاوية النموذج الزجاجية */
+        .form-panel { background: var(--glass-bg); backdrop-filter: blur(15px); border: 1px solid var(--glass-border); padding: 35px 40px; border-radius: 16px; box-shadow: var(--glass-shadow); width: 100%; max-width: 650px; }
+        .form-header { text-align: center; margin-bottom: 25px; }
+        .form-header h2 { font-size: 1.6rem; font-weight: 800; color: var(--text-dark); margin-bottom: 5px; }
+        .form-header p { color: var(--text-muted); font-size: 0.95rem; }
+
+        /* تنسيق الخانات الاحترافي (إصلاح RTL) */
+        .form-group { margin-bottom: 18px; text-align: right; }
+        .form-group label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 0.9rem; color: #34495e; }
+        
+        .input-wrapper { position: relative; width: 100%; }
+        /* padding-right أكبر لترك مساحة للأيقونة في العربية */
+        .input-wrapper input, .input-wrapper select { width: 100%; padding: 12px 42px 12px 15px; border: 1px solid rgba(0,0,0,0.12); border-radius: 8px; background: rgba(255,255,255,0.6); font-family: 'Cairo', sans-serif; font-size: 0.95rem; color: var(--text-dark); transition: all 0.3s ease; appearance: none; }
+        .input-wrapper input:focus, .input-wrapper select:focus { background: #fff; border-color: var(--primary); outline: none; box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.15); }
+        
+        /* ضبط مكان الأيقونة بشكل مثالي وسط الخانة عمودياً */
+        .input-wrapper i.icon { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: #95a5a6; font-size: 1.1rem; transition: 0.3s; pointer-events: none; }
+        .input-wrapper input:focus + i.icon, .input-wrapper select:focus + i.icon { color: var(--primary); }
+
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        
+        /* الزر */
+        .btn-submit { background: var(--primary); color: white; width: 100%; padding: 14px; border: none; border-radius: 8px; font-size: 1.1rem; font-family: 'Cairo', sans-serif; font-weight: 700; cursor: pointer; transition: 0.3s; margin-top: 15px; display: flex; justify-content: center; align-items: center; gap: 10px; }
+        .btn-submit:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(39, 174, 96, 0.3); }
+
+        .bottom-link { display: block; text-align: center; margin-top: 20px; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: 0.3s; }
+        .bottom-link:hover { color: var(--primary); }
+
+        @media (max-width: 600px) {
+            .grid-2 { grid-template-columns: 1fr; gap: 0; }
+            .form-panel { padding: 25px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/" class="logo"><i class="fas fa-layer-group"></i> MyTaxes</a>
+    </nav>
+
+    <div class="form-panel">
+        <div class="form-header">
+            <h2>طلب الولوج للخدمات</h2>
+            <p>يرجى إدخال معلوماتك الجبائية بدقة</p>
+        </div>
+        
+        <form action="/api/register" method="POST">
+            <div class="form-group">
+                <label>رقم التعريف الجبائي (NIF)</label>
+                <div class="input-wrapper">
+                    <input type="text" name="nif" required placeholder="أدخل رقم NIF المكون من 15 رقم">
+                    <i class="fas fa-id-card icon"></i>
+                </div>
+            </div>
+            
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>الاسم أو التسمية الاجتماعية</label>
+                    <div class="input-wrapper">
+                        <input type="text" name="name" required placeholder="الاسم الكامل">
+                        <i class="fas fa-user icon"></i>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>رقم الهاتف</label>
+                    <div class="input-wrapper">
+                        <input type="tel" name="phone" required placeholder="مثال: 0555000000">
+                        <i class="fas fa-phone icon"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>نوع النشاط</label>
+                <div class="input-wrapper">
+                    <select name="activity" required>
+                        <option value="" disabled selected>اختر نوع نشاطك...</option>
+                        <option value="تجاري">تجاري</option>
+                        <option value="صناعي">صناعي</option>
+                        <option value="خدماتي">خدماتي</option>
+                        <option value="مهنة حرة">مهنة حرة</option>
+                    </select>
+                    <i class="fas fa-briefcase icon"></i>
+                </div>
+            </div>
+
+            <hr style="border: 0; border-top: 1px solid rgba(0,0,0,0.08); margin: 25px 0;">
+
+            <div class="form-group">
+                <label>اسم المستخدم</label>
+                <div class="input-wrapper">
+                    <input type="text" name="username" required placeholder="اسم مستخدم للدخول للمنصة">
+                    <i class="fas fa-at icon"></i>
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>كلمة المرور</label>
+                    <div class="input-wrapper">
+                        <input type="password" name="password" required placeholder="••••••••">
+                        <i class="fas fa-lock icon"></i>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>تأكيد كلمة المرور</label>
+                    <div class="input-wrapper">
+                        <input type="password" name="confirmPassword" required placeholder="••••••••">
+                        <i class="fas fa-lock icon"></i>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-submit">
+                إرسال الطلب <i class="fas fa-paper-plane"></i>
+            </button>
+        </form>
+        <a href="/login" class="bottom-link">لديك حساب بالفعل؟ تسجيل الدخول</a>
+    </div>
+</body>
+</html>
