@@ -5,53 +5,31 @@ const bodyParser = require('body-parser');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// إعدادات لقراءة بيانات النماذج (Forms)
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
-// تحديد مجلد public للملفات الثابتة (HTML, CSS)
 app.use(express.static(path.join(__dirname, 'public')));
 
-// مسار الصفحة الرئيسية
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
+// المسارات (Routes)
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'public', 'index.html')));
+app.get('/register', (req, res) => res.sendFile(path.join(__dirname, 'public', 'register.html')));
+app.get('/login', (req, res) => res.sendFile(path.join(__dirname, 'public', 'login.html')));
 
-// مسار صفحة التسجيل (طلب الولوج)
-app.get('/register', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'register.html'));
-});
-
-// مسار استقبال بيانات التسجيل
+// استقبال بيانات التسجيل
 app.post('/api/register', (req, res) => {
-    const { nif, name, activity, phone, username, password, confirmPassword } = req.body;
-    
-    // التحقق من تطابق كلمة المرور
+    const { password, confirmPassword } = req.body;
     if (password !== confirmPassword) {
-        return res.status(400).send(`
-            <h2 style="color:red; text-align:center; font-family:tahoma; margin-top:50px;">
-                كلمة المرور غير متطابقة! <a href="/register">الرجوع</a>
-            </h2>
-        `);
+        return res.send('<script>alert("كلمة المرور غير متطابقة!"); window.location.href="/register";</script>');
     }
-
-    // هنا في العادة نقوم بحفظ البيانات في قاعدة البيانات (Database)
-    console.log('طلب تسجيل جديد:', req.body);
-    
-    res.status(200).send(`
-        <div style="text-align:center; font-family:tahoma; margin-top:50px; direction:rtl;">
-            <h2 style="color:green;">تم إرسال طلبك بنجاح!</h2>
-            <p>رقم التعريف الجبائي الخاص بك: ${nif}</p>
-            <p>سيتم مراجعة طلبك والرد عليك قريباً.</p>
-            <a href="/" style="padding:10px 20px; background:#0056b3; color:#fff; text-decoration:none; border-radius:5px;">العودة للرئيسية</a>
-        </div>
-    `);
+    console.log('طلب تسجيل:', req.body);
+    res.send('<script>alert("تم إرسال طلب الولوج بنجاح!"); window.location.href="/login";</script>');
 });
 
-// تشغيل الخادم
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+// استقبال بيانات تسجيل الدخول
+app.post('/api/login', (req, res) => {
+    const { username, password } = req.body;
+    console.log('محاولة دخول:', username);
+    res.send('<script>alert("تم تسجيل الدخول بنجاح!"); window.location.href="/";</script>');
 });
 
-// ضروري من أجل Vercel
-module.exports = app; 
+app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+module.exports = app;
