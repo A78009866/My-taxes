@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Taxes - الرئيسية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* إعدادات عامة وتصميم زجاجي */
+        :root { --primary: #27ae60; --glass-bg: rgba(255, 255, 255, 0.7); --glass-border: rgba(255, 255, 255, 0.4); }
+        body { font-family: 'Cairo', sans-serif; background: linear-gradient(135deg, #e0eafc, #cfdef3); margin: 0; padding-top: 80px; min-height: 100vh; display: flex; flex-direction: column; align-items: center; }
+        
+        /* النافبار الزجاجي */
+        .navbar { position: fixed; top: 0; width: 100%; height: 60px; background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border-bottom: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center; padding: 0 5%; box-sizing: border-box; z-index: 1000; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .logo { font-size: 1.4rem; font-weight: 700; color: #2c3e50; text-decoration: none; letter-spacing: 1px; }
+        .logo span { color: var(--primary); }
+        .nav-links a { color: #2c3e50; text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--primary); }
+
+        /* حاوية البطاقات */
+        .container { text-align: center; width: 90%; max-width: 700px; margin-top: 40px; }
+        .header-title { color: #2c3e50; font-size: 1.8rem; margin-bottom: 5px; }
+        .header-sub { color: #5a6a77; font-size: 0.95rem; margin-bottom: 30px; }
+        
+        .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+        .card { background: var(--glass-bg); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); padding: 25px 20px; border-radius: 12px; text-decoration: none; color: #2c3e50; transition: all 0.3s ease; box-shadow: 0 8px 32px rgba(31, 38, 135, 0.07); }
+        .card:hover { transform: translateY(-5px); background: rgba(255, 255, 255, 0.9); box-shadow: 0 10px 40px rgba(31, 38, 135, 0.15); }
+        .card i { font-size: 2.5rem; color: var(--primary); margin-bottom: 15px; }
+        .card.login i { color: #2980b9; }
+        .card h3 { margin: 0 0 10px; font-size: 1.1rem; }
+        .card p { font-size: 0.85rem; color: #5a6a77; margin: 0; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/" class="logo"><i class="fas fa-leaf"></i> My <span>Taxes</span></a>
+        <div class="nav-links">
+            <a href="/login"><i class="fas fa-sign-in-alt"></i> الدخول</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 class="header-title">المنصة الرقمية للضرائب</h1>
+        <p class="header-sub">بوابة الخدمات الجبائية والدفع الإلكتروني الموحدة</p>
+        
+        <div class="cards">
+            <a href="/register" class="card">
+                <i class="fas fa-user-plus"></i>
+                <h3>طلب الولوج للخدمات</h3>
+                <p>تسجيل حساب جديد للمكلفين بالضريبة</p>
+            </a>
+            <a href="/login" class="card login">
+                <i class="fas fa-sign-in-alt"></i>
+                <h3>تسجيل الدخول</h3>
+                <p>الدخول إلى فضاء المكلف بالضريبة</p>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
