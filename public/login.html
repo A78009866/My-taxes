@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Taxes - تسجيل الدخول</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2980b9; /* لون أزرق لصفحة الدخول للتمييز */
+            --primary-hover: #2471a3;
+            --text-dark: #2c3e50;
+            --text-muted: #7f8c8d;
+            --glass-bg: rgba(255, 255, 255, 0.75);
+            --glass-border: rgba(255, 255, 255, 0.5);
+            --glass-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Cairo', sans-serif; background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%); min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 100px 20px 40px; color: var(--text-dark); }
+        
+        .navbar { position: fixed; top: 0; left: 0; width: 100%; height: 70px; background: rgba(255, 255, 255, 0.45); backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center; padding: 0 8%; z-index: 1000; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
+        .logo { font-size: 1.6rem; font-weight: 800; color: var(--text-dark); text-decoration: none; display: flex; align-items: center; gap: 8px; }
+        .logo i { color: #27ae60; } /* شعار التطبيق يبقى أخضر */
+
+        /* حاوية النموذج الزجاجية */
+        .form-panel { background: var(--glass-bg); backdrop-filter: blur(15px); border: 1px solid var(--glass-border); padding: 40px 30px; border-radius: 16px; box-shadow: var(--glass-shadow); width: 100%; max-width: 420px; text-align: center; }
+        .form-panel i.main-icon { font-size: 3.5rem; color: var(--primary); margin-bottom: 15px; }
+        .form-header h2 { font-size: 1.6rem; font-weight: 800; color: var(--text-dark); margin-bottom: 25px; }
+
+        /* تنسيق الخانات الاحترافي */
+        .form-group { margin-bottom: 18px; text-align: right; }
+        .input-wrapper { position: relative; width: 100%; }
+        .input-wrapper input { width: 100%; padding: 14px 42px 14px 15px; border: 1px solid rgba(0,0,0,0.12); border-radius: 8px; background: rgba(255,255,255,0.6); font-family: 'Cairo', sans-serif; font-size: 1rem; color: var(--text-dark); transition: all 0.3s ease; }
+        .input-wrapper input:focus { background: #fff; border-color: var(--primary); outline: none; box-shadow: 0 0 0 3px rgba(41, 128, 185, 0.15); }
+        
+        /* الأيقونة داخل الخانة */
+        .input-wrapper i.icon { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: #95a5a6; font-size: 1.1rem; transition: 0.3s; pointer-events: none; }
+        .input-wrapper input:focus + i.icon { color: var(--primary); }
+        
+        /* الزر */
+        .btn-submit { background: var(--primary); color: white; width: 100%; padding: 14px; border: none; border-radius: 8px; font-size: 1.1rem; font-family: 'Cairo', sans-serif; font-weight: 700; cursor: pointer; transition: 0.3s; margin-top: 10px; display: flex; justify-content: center; align-items: center; gap: 10px; }
+        .btn-submit:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(41, 128, 185, 0.3); }
+
+        .bottom-link { display: block; text-align: center; margin-top: 25px; color: var(--text-muted); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: 0.3s; }
+        .bottom-link:hover { color: var(--primary); text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/" class="logo"><i class="fas fa-layer-group"></i> MyTaxes</a>
+    </nav>
+
+    <div class="form-panel">
+        <i class="fas fa-fingerprint main-icon"></i>
+        <div class="form-header">
+            <h2>تسجيل الدخول</h2>
+        </div>
+        
+        <form action="/api/login" method="POST">
+            <div class="form-group">
+                <div class="input-wrapper">
+                    <input type="text" name="username" required placeholder="اسم المستخدم أو NIF">
+                    <i class="fas fa-user icon"></i>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <div class="input-wrapper">
+                    <input type="password" name="password" required placeholder="كلمة المرور">
+                    <i class="fas fa-lock icon"></i>
+                </div>
+            </div>
+            
+            <button type="submit" class="btn-submit">
+                دخول <i class="fas fa-sign-in-alt"></i>
+            </button>
+        </form>
+        
+        <a href="/register" class="bottom-link">ليس لديك حساب؟ طلب ولوج جديد</a>
+    </div>
+</body>
+</html>
